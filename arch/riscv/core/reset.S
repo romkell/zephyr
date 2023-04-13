@@ -77,7 +77,8 @@ aa_loop:
 	 * Initially, setup stack pointer to
 	 * z_interrupt_stacks + __z_interrupt_stack_SIZEOF
 	 */
-	la sp, z_interrupt_stacks
+	la t0, z_interrupt_stacks
+	mv sp, t0
 	li t0, __z_interrupt_stack_SIZEOF
 	add sp, sp, t0
 
