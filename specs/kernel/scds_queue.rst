@@ -193,14 +193,14 @@ Traceing
 .. creq:: Traceing macro function-blocking
    :id: SCDS_QUEUE_5
    :status: open
-   :tags: Safety-scope
+   :tags: Security-scope
 
    The system function-blocking traceing macro executed before function blocks shall be custom definable by the user.
 
 .. creq:: Tracing macros defaults
    :id: SCDS_QUEUE_6
    :status: open
-   :tags: Safety-scope
+   :tags: Security-scope, Safety-scope
 
    The system function tracing macros shall default to no executable code when not set by the user.
 
