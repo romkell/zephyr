@@ -1,0 +1,4 @@
+{
+    "sphinx-needs.needsJson": "${workspaceFolder}/specs/build/needs.json",
+    "sphinx-needs.srcDir": "${workspaceFolder}/specs"
+}

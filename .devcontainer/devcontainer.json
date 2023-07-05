@@ -1,0 +1,9 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+	"name": "sphinx-needs",
+	"image": "danwos/sphinxneeds-latexpdf:latest",
+	"remoteUser": "dockeruser",
+	"remoteEnv": {"SHELL":"/bin/bash"},
+	"workspaceMount": "source=${localWorkspaceFolder}/..,target=/home/user/workspace/zephyr-safety/romkell,type=bind,consistency=delegated",
+	"workspaceFolder": "/home/user/workspace/zephyr-safety/romkell/zephyr"
+}
