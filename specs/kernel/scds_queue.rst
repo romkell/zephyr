@@ -12,6 +12,158 @@ General
 
    Queue implementation shall use the systems single-linked list implementation for the data queue.
 
+   Testing formats:
+
+   Bulleted List
+   -------------
+
+   * bulleted list 1
+   * bulleted list 2
+
+     * nested bulleted list
+
+   * bulleted list continued
+
+   Numbered List (Numbers)
+   -----------------------
+
+   1. numbered list using numbers
+   2. numbered list using numbers
+
+      1. numbered list using numbers nested
+
+   3. numbered list using numbers continued
+
+
+   Numbered List (Hashes)
+   ----------------------
+
+   #. numbered list using hashes
+   #. numbered list using numbhashesers
+
+      #. numbered list using hashes nested
+
+   #. numbered list using hashes continued
+
+   Normal text. Next paragraph is a code sample::
+
+      It is not processed in any way, except
+      that the indentation is removed.
+
+      It can span multiple lines.
+
+   This is a normal text paragraph again.
+
+
+   Grid Table
+   ----------
+
+   +------------------------+------------+----------+----------+
+   | Header row, column 1   | Header 2   | Header 3 | Header 4 |
+   | (header rows optional) |            |          |          |
+   +========================+============+==========+==========+
+   | body row 1, column 1   | column 2   | column 3 | column 4 |
+   +------------------------+------------+----------+----------+
+   | body row 2             | ...        | ...      |          |
+   +------------------------+------------+----------+----------+
+
+   Simple Table
+   ------------
+
+   =====  =====  =======
+   A      B      A and B
+   =====  =====  =======
+   False  False  False
+   True   False  False
+   False  True   False
+   True   True   True
+   =====  =====  =======
+
+   List Table
+   ----------
+
+   .. list-table:: Frozen Delights!
+      :widths: 15 10 30
+      :header-rows: 1
+
+      * - Treat
+        - Quantity
+        - Description
+      * - Albatross
+        - 2.99
+        - On a stick!
+      * - Crunchy Frog
+        - 1.49
+        - If we took the bones out, it wouldn't be
+          crunchy, now would it?
+      * - Gannet Ripple
+        - 1.99
+        - On a stick!
+
+   Math
+   ----
+
+   .. math::
+
+      α_t(i) = P(O_1, O_2, … O_t, q_t = S_i λ)
+
+
+   Code
+   -----------
+
+   .. code:: python
+
+      def my_function():
+           "just a test"
+           print 8/2
+
+
+   Hyperlinks
+   ----------
+
+   This is a paragraph that contains `a link`_.
+
+   .. _a link: https://domain.invalid/
+
+
+   PlantUML
+   --------
+   Currently not working, since dependencies (e.g. plantuml) not installed!
+
+   .. uml::
+
+      @startuml
+      Alice -> Bob: Hi!
+      Alice <- Bob: How are you?
+      @enduml
+
+
+   Graphviz
+   --------
+
+   .. graphviz::
+
+      digraph Flatland {
+
+         a -> b -> c -> g;
+         a  [shape=polygon,sides=4]
+         b  [shape=polygon,sides=5]
+         c  [shape=polygon,sides=6]
+
+         g [peripheries=3,color=yellow];
+         s [shape=invtriangle,peripheries=1,color=red,style=filled];
+         w  [shape=triangle,peripheries=1,color=blue,style=filled];
+
+         }
+
+
+   API Reference
+   *************
+   Currently not working, since dependencies (e.g. breathe) not installed!
+
+   .. doxygengroup:: timer_apis
+
+
 .. creq:: Wait queue implemenation
    :id: SCDS_QUEUE_2
    :status: open
