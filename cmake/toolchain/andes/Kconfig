@@ -1,0 +1,8 @@
+# GNU NDS Andes Toolchain provided by AndeSight
+
+# Copyright (c) 2022 Baumer AG (www.baumer.com)
+# SPDX-License-Identifier: Apache-2.0
+
+config NDS_TOOLCHAIN_PATH
+	def_bool y
+	select HAS_NEWLIB_LIBC_NANO
