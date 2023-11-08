@@ -365,6 +365,14 @@ config GEN_IRQ_VECTOR_TABLE
 config ARCH_HAS_SINGLE_THREAD_SUPPORT
 	default y if !SMP
 
+config RUNTIME_NMI
+	bool "Attach an NMI handler at runtime"
+	help
+	  The kernel provides a simple NMI handler that simply hangs in a tight
+	  loop if triggered. This fills the requirement that there must be an
+	  NMI handler installed when the CPU boots. If a custom handler is
+	  needed, enable this option and attach it via z_riscv_nmi_set_handler().
+
 rsource "Kconfig.isa"
 rsource "Kconfig.core"
 

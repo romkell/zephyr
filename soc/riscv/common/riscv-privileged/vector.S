@@ -13,8 +13,11 @@ GTEXT(__start)
 /* imports */
 GTEXT(__initialize)
 GTEXT(_isr_wrapper)
+GTEXT(z_riscv_nmi)
 
 SECTION_FUNC(vectors, __start)
+	csrr t0, mcause
+	bnez t0, z_riscv_nmi
 #if defined(CONFIG_RISCV_GP)
 	/* Initialize global pointer */
 	.option push
@@ -99,3 +102,8 @@ SECTION_FUNC(vectors, __start)
 
 	/* Jump to __reset */
 	tail __reset
+
+	.weak z_riscv_nmi
+z_riscv_nmi:
+    wfi
+1:  j 1b

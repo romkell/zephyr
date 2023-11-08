@@ -7,6 +7,7 @@ zephyr_library_sources(
   fatal.c
   irq_manage.c
   isr.S
+  nmi.c
   prep_c.c
   reboot.c
   reset.S
