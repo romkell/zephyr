@@ -7,13 +7,14 @@ if(NOT EXISTS ${NDS_TOOLCHAIN_PATH})
   message(FATAL_ERROR "Nothing found at NDS_TOOLCHAIN_PATH: '${NDS_TOOLCHAIN_PATH}'")
 endif()
 
-if(("${BOARD}" STREQUAL "gpsi_cpu1") OR ("${BOARD}" STREQUAL "gpsi_cpu1_sim"))
+if("${BOARD}" MATCHES "^gpsi_cpu1")
 set(NDS_TOOLCHAIN_PATH_FULL ${NDS_TOOLCHAIN_PATH}/nds32le-elf-mculib-v5)
-elseif(("${BOARD}" STREQUAL "gpsi_cpu2") OR ("${BOARD}" STREQUAL "gpsi_cpu2_sim"))
+elseif("${BOARD}" MATCHES "^gpsi_cpu2")
 set(NDS_TOOLCHAIN_PATH_FULL ${NDS_TOOLCHAIN_PATH}/nds32le-elf-mculib-v5e)
-elseif(("${BOARD}" STREQUAL "gpsi_target") OR ("${BOARD}" STREQUAL "gpsi_target_sim"))
+elseif("${BOARD}" MATCHES "^gpsi_target")
 set(NDS_TOOLCHAIN_PATH_FULL ${NDS_TOOLCHAIN_PATH}/nds32le-elf-mculib-v5)
 endif()
+assert(NDS_TOOLCHAIN_PATH_FULL "board not supported: ${BOARD}")
 
 set(TOOLCHAIN_HOME ${NDS_TOOLCHAIN_PATH_FULL})
 
