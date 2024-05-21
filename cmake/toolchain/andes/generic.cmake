@@ -11,6 +11,8 @@ if(("${BOARD}" STREQUAL "gpsi_cpu1") OR ("${BOARD}" STREQUAL "gpsi_cpu1_sim"))
 set(NDS_TOOLCHAIN_PATH_FULL ${NDS_TOOLCHAIN_PATH}/nds32le-elf-mculib-v5)
 elseif(("${BOARD}" STREQUAL "gpsi_cpu2") OR ("${BOARD}" STREQUAL "gpsi_cpu2_sim"))
 set(NDS_TOOLCHAIN_PATH_FULL ${NDS_TOOLCHAIN_PATH}/nds32le-elf-mculib-v5e)
+elseif(("${BOARD}" STREQUAL "gpsi_target") OR ("${BOARD}" STREQUAL "gpsi_target_sim"))
+set(NDS_TOOLCHAIN_PATH_FULL ${NDS_TOOLCHAIN_PATH}/nds32le-elf-mculib-v5)
 endif()
 
 set(TOOLCHAIN_HOME ${NDS_TOOLCHAIN_PATH_FULL})
