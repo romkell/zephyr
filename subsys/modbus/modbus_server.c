@@ -104,6 +104,7 @@ static void mbs_exception_rsp(struct modbus_context *ctx, uint8_t excep_code)
  *  Byte count            1 Bytes
  *  Coil status           N * 1 Byte
  */
+#ifdef CONFIG_MODBUS_FC01_COIL_RD
 static bool mbs_fc01_coil_read(struct modbus_context *ctx)
 {
 	const uint16_t coils_limit = 2000;
@@ -189,6 +190,7 @@ static bool mbs_fc01_coil_read(struct modbus_context *ctx)
 
 	return true;
 }
+#endif
 
 /*
  * FC 02 (0x02) Read Discrete Inputs
@@ -203,6 +205,7 @@ static bool mbs_fc01_coil_read(struct modbus_context *ctx)
  *  Byte count            1 Bytes
  *  Input status           N * 1 Byte
  */
+#ifdef CONFIG_MODBUS_FC02_DI_RD
 static bool mbs_fc02_di_read(struct modbus_context *ctx)
 {
 	const uint16_t di_limit = 2000;
@@ -290,6 +293,7 @@ static bool mbs_fc02_di_read(struct modbus_context *ctx)
 
 	return true;
 }
+#endif
 
 /*
  * 03 (0x03) Read Holding Registers
@@ -304,6 +308,7 @@ static bool mbs_fc02_di_read(struct modbus_context *ctx)
  *  Byte count            1 Bytes
  *  Register Value        N * 2 Byte
  */
+#ifdef CONFIG_MODBUS_FC03_HOLDING_REG_RD
 static bool mbs_fc03_hreg_read(struct modbus_context *ctx)
 {
 	const uint16_t regs_limit = 125;
@@ -400,6 +405,7 @@ static bool mbs_fc03_hreg_read(struct modbus_context *ctx)
 
 	return true;
 }
+#endif
 
 /*
  * 04 (0x04) Read Input Registers
@@ -414,6 +420,7 @@ static bool mbs_fc03_hreg_read(struct modbus_context *ctx)
  *  Byte count            1 Bytes
  *  Register Value        N * 2 Byte
  */
+#ifdef CONFIG_MODBUS_FC04_IN_REG_RD
 static bool mbs_fc04_inreg_read(struct modbus_context *ctx)
 {
 	const uint16_t regs_limit = 125;
@@ -510,6 +517,7 @@ static bool mbs_fc04_inreg_read(struct modbus_context *ctx)
 
 	return true;
 }
+#endif
 
 /*
  * FC 05 (0x05) Write Single Coil
@@ -524,6 +532,7 @@ static bool mbs_fc04_inreg_read(struct modbus_context *ctx)
  *  Output Address        2 Bytes
  *  Output Value          2 Bytes
  */
+#ifdef CONFIG_MODBUS_FC05_COIL_WR
 static bool mbs_fc05_coil_write(struct modbus_context *ctx)
 {
 	const uint8_t request_len = 4;
@@ -569,6 +578,7 @@ static bool mbs_fc05_coil_write(struct modbus_context *ctx)
 
 	return true;
 }
+#endif
 
 /*
  * 06 (0x06) Write Single Register
@@ -583,6 +593,7 @@ static bool mbs_fc05_coil_write(struct modbus_context *ctx)
  *  Register Address      2 Bytes
  *  Register Value        2 Bytes
  */
+#ifdef CONFIG_MODBUS_FC06_HOLDING_REG_WR
 static bool mbs_fc06_hreg_write(struct modbus_context *ctx)
 {
 	const uint8_t request_len = 4;
@@ -619,6 +630,7 @@ static bool mbs_fc06_hreg_write(struct modbus_context *ctx)
 
 	return true;
 }
+#endif
 
 /*
  * 08 (0x08) Diagnostics
@@ -721,6 +733,7 @@ static bool mbs_fc08_diagnostics(struct modbus_context *ctx)
  *  Starting Address      2 Bytes
  *  Quantity of Outputs   2 Bytes
  */
+#ifdef CONFIG_MODBUS_FC15_COILS_WR
 static bool mbs_fc15_coils_write(struct modbus_context *ctx)
 {
 	const uint16_t coils_limit = 2000;
@@ -802,6 +815,7 @@ static bool mbs_fc15_coils_write(struct modbus_context *ctx)
 
 	return true;
 }
+#endif
 
 /*
  * FC16 (0x10) Write Multiple registers
@@ -823,6 +837,7 @@ static bool mbs_fc15_coils_write(struct modbus_context *ctx)
  * the 'Daniels Flow Meter' extensions.  This means that each register
  * requested is considered as a 32-bit IEEE-754 floating-point format.
  */
+#ifdef CONFIG_MODBUS_FC16_HOLDING_REGS_WR
 static bool mbs_fc16_hregs_write(struct modbus_context *ctx)
 {
 	const uint16_t regs_limit = 125;
@@ -925,6 +940,7 @@ static bool mbs_fc16_hregs_write(struct modbus_context *ctx)
 
 	return true;
 }
+#endif
 
 static bool mbs_try_user_fc(struct modbus_context *ctx, uint8_t fc)
 {
@@ -991,41 +1007,57 @@ bool modbus_server_handler(struct modbus_context *ctx)
 	update_server_msg_ctr(ctx);
 
 	switch (fc) {
+#ifdef CONFIG_MODBUS_FC01_COIL_RD
 	case MODBUS_FC01_COIL_RD:
 		send_reply = mbs_fc01_coil_read(ctx);
 		break;
+#endif
 
+#ifdef CONFIG_MODBUS_FC02_DI_RD
 	case MODBUS_FC02_DI_RD:
 		send_reply = mbs_fc02_di_read(ctx);
 		break;
+#endif
 
+#ifdef CONFIG_MODBUS_FC03_HOLDING_REG_RD
 	case MODBUS_FC03_HOLDING_REG_RD:
 		send_reply = mbs_fc03_hreg_read(ctx);
 		break;
+#endif
 
+#ifdef CONFIG_MODBUS_FC04_IN_REG_RD
 	case MODBUS_FC04_IN_REG_RD:
 		send_reply = mbs_fc04_inreg_read(ctx);
 		break;
+#endif
 
+#ifdef CONFIG_MODBUS_FC05_COIL_WR
 	case MODBUS_FC05_COIL_WR:
 		send_reply = mbs_fc05_coil_write(ctx);
 		break;
+#endif
 
+#ifdef CONFIG_MODBUS_FC06_HOLDING_REG_WR
 	case MODBUS_FC06_HOLDING_REG_WR:
 		send_reply = mbs_fc06_hreg_write(ctx);
 		break;
+#endif
 
 	case MODBUS_FC08_DIAGNOSTICS:
 		send_reply = mbs_fc08_diagnostics(ctx);
 		break;
 
+#ifdef CONFIG_MODBUS_FC15_COILS_WR
 	case MODBUS_FC15_COILS_WR:
 		send_reply = mbs_fc15_coils_write(ctx);
 		break;
+#endif
 
+#ifdef CONFIG_MODBUS_FC16_HOLDING_REGS_WR
 	case MODBUS_FC16_HOLDING_REGS_WR:
 		send_reply = mbs_fc16_hregs_write(ctx);
 		break;
+#endif
 
 	default:
 		send_reply = mbs_try_user_fc(ctx, fc);
