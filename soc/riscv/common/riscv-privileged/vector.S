@@ -16,8 +16,14 @@ GTEXT(_isr_wrapper)
 GTEXT(z_riscv_nmi)
 
 SECTION_FUNC(vectors, __start)
+#if defined(CONFIG_SOC_RISCV_BAUMER_GPSI)
 	csrr t0, mcause
-	bnez t0, z_riscv_nmi
+	li t1, 1
+	andi t0, t0, 0x7FF // Mask out all but the first 11 bits
+	bne t0, t1, 1f
+	j z_riscv_nmi
+1:
+#endif
 #if defined(CONFIG_RISCV_GP)
 	/* Initialize global pointer */
 	.option push
