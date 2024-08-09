@@ -512,7 +512,8 @@ class DeviceHandler(Handler):
                         command_extra_args.append("--cmd-pre-init")
                         command_extra_args.append("cmsis_dap_serial %s" % board_id)
                     elif runner == "jlink":
-                        command.append("--tool-opt=-SelectEmuBySN  %s" % board_id)
+                        command.append("--dev-id")
+                        command.append(board_id)
                     elif runner == "stm32cubeprogrammer":
                         command.append("--tool-opt=sn=%s" % board_id)
 
