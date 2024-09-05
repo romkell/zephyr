@@ -5,6 +5,7 @@
 '''Runner for debugging with J-Link.'''
 
 import argparse
+import ctypes
 import ipaddress
 import logging
 import os
@@ -182,9 +183,9 @@ class JLinkBinaryRunner(ZephyrBinaryRunner):
                 self.logger.warning(f'unknown platform {plat}; assuming UNIX')
                 libname = sdk + '.so'
 
-            lib = Library(dllpath=os.fspath(Path(self.commander).parent /
+            lib = ctypes.cdll.LoadLibrary(os.fspath(Path(self.commander).parent /
                                             libname))
-            version = int(lib.dll().JLINKARM_GetDLLVersion())
+            version = int(lib.JLINKARM_GetDLLVersion())
             self.logger.debug('JLINKARM_GetDLLVersion()=%s', version)
             # The return value is an int with 2 decimal digits per
             # version subfield.
