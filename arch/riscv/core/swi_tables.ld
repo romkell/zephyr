@@ -1,10 +1,8 @@
 /*
- * Copyright (c) 2022 Antmicro <www.antmicro.com>
+ * Copyright (c) 2025 Baumer (www.baumer.com)
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-
-KEEP(*(.vectors.*))
 #if LINKER_ZEPHYR_FINAL && defined(CONFIG_ISR_TABLES_LOCAL_DECLARATION)
-INCLUDE isr_tables_vt.ld
+INCLUDE isr_tables_swi.ld
 #endif
