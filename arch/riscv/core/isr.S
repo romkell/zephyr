@@ -65,6 +65,7 @@ GTEXT(z_riscv_fatal_error)
 GTEXT(z_get_next_switch_handle)
 GTEXT(z_riscv_switch)
 GTEXT(z_riscv_thread_start)
+GTEXT(z_irq_spurious)
 
 #ifdef CONFIG_TRACING
 GTEXT(sys_trace_isr_enter)
@@ -113,6 +114,8 @@ SECTION_FUNC(exception.entry, _isr_wrapper)
 
 /* Provide requested alignment, which depends e.g. on MTVEC format */
 .balign CONFIG_RISCV_TRAP_HANDLER_ALIGNMENT
+
+#ifdef CONFIG_GEN_SW_ISR_TABLE
 
 #ifdef CONFIG_USERSPACE
 	/* retrieve address of _current_cpu preserving s0 */
@@ -709,3 +712,10 @@ fp_trap_exit:
 #endif /* CONFIG_RISCV_SOC_HAS_ISR_STACKING */
 
 	mret
+
+#else /* CONFIG_GEN_SW_ISR_TABLE */
+
+	/* no isr table generated. Forward to z_irq_spurious */
+	j z_irq_spurious
+
+#endif
